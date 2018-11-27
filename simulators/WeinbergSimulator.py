@@ -2,7 +2,6 @@ from simulators import Simulator
 
 import torch
 from torch.distributions import Uniform
-from sklearn.utils import check_random_state
 import numpy as np
 import matplotlib.pyplot as plt
 
