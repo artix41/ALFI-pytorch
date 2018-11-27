@@ -4,15 +4,28 @@ Official PyTorch implementation of the paper *Recurrent Machines for Likelihood-
 
 ## Installation
 
-* Clone the repository
+* Clone the repository:
+```bash
+git clone git@github.com:artix41/ALFI-pytorch.git
+cd ALFI-pytorch/
+```
 * Inside an [Anaconda](https://www.anaconda.com/) environment, install the requirements from the file `requirements.txt`: 
 ```bash
 conda install --file requirements.txt
-```
+``` 
 
 ## Usage
 
-### Reproduce our experiments
+### General
+
+The script `run-experiments.py` starts one or several experiments described in the configuration file(s) given in input. Its general usage is `run-experiments.py [-h] [-l] [-v {0,1,2,3}] configs_dir output_dir`. For instance, if you want to run the default experiment on the simplified particle physics simulator (called Weinberg), you can run:
+```batch
+run-experiments.py configs/weinberg.py outputs -v 3
+```
+Experiments are saved automatically every `save_every` iterations (given in the configuration file). If you want to load a previously saved experiment, simply use the `-l` loading option:
+```batch
+run-experiments.py configs/weinberg.py outputs -v 3 -l
+```
 
 ### Use your own simulator
 
