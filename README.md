@@ -34,8 +34,10 @@ Hereunder is a complete list of the configuration parameters with their descript
 - model: LuckyALFINet
 - simulator:
     - name:
-      - ```The class name of a simulator implementation.
-      e.g. PoissonSimulator, LinearRegressionSimiulator, WeinbergSimulator, ...```
+      - ```batch
+      The class name of a simulator implementation.
+      e.g. PoissonSimulator, LinearRegressionSimiulator, WeinbergSimulator, ...
+      ```
     - parameters: The list of parameters taken by the constructor of the simulator class. e.g. [], "sigma: 0.5", ...
 - train:
     - lr_scheduling: false
