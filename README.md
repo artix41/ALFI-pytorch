@@ -33,8 +33,8 @@ run-experiments.py configs/weinberg.py outputs -v 3 -l
 Hereunder is a complete list of the configuration parameters with their description:
 - model: LuckyALFINet
 - simulator:
-    - name: WeinbergSimulator
-    - parameters: []
+    - name: The class name of a simulator implementation. e.g. PoissonSimulator, LinearRegressionSimiulator, WeinbergSimulator, ...
+    - parameters: The list of parameters taken by the constructor of the simulator class. e.g. [], "sigma: 0.5", ...
 - train:
     - lr_scheduling: false
     - nb_iter_alfi_min: 15
