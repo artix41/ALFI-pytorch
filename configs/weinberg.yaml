@@ -1,13 +1,10 @@
-model: LuckyALFINet
+model: ALFINet
 simulator:
     name: WeinbergSimulator
     parameters: []
 train:
     lr_scheduling: false
-    nb_iter_alfi_min: 15
-    nb_iter_alfi_max: 15
-    nb_iter_alfi_step: 5
-    nb_iter_alfi_period: 5
+    nb_iter: 15
     nb_theta: 1000
     nb_x_per_theta: 500
     meta_batch_size: 16

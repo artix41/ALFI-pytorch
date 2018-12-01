@@ -31,40 +31,76 @@ run-experiments.py configs/weinberg.py outputs -v 3 -l
 
 ### Configuration file cheat sheet
 Hereunder is a complete list of the configuration parameters with their description:
-- model: LuckyALFINet
+- model:
+  - `The class name of the model to train. You can for example change the code of ALFINet.py into a file BetterALFINet.py`
+  - ` e.g. LuckyALFINet, BetterALFINet`
 - simulator:
+    - `It contains the parameters related to the simulator.`
     - name:
-      - `batch
-      The class name of a simulator implementation.
-      e.g. PoissonSimulator, LinearRegressionSimiulator, WeinbergSimulator, ...
-      `
-    - parameters: The list of parameters taken by the constructor of the simulator class. e.g. [], "sigma: 0.5", ...
+      - `The class name of a simulator implementation.`
+      - `e.g. PoissonSimulator, LinearRegressionSimiulator, WeinbergSimulator, ...`
+    - parameters:
+      - `The list of parameters taken by the constructor of the simulator class.`
+      - ` e.g. [], sigma: 0.5, ...`
 - train:
-    - lr_scheduling: false
-    - nb_iter_alfi_min: 15
-    - nb_iter_alfi_max: 15
-    - nb_iter_alfi_step: 5
-    - nb_iter_alfi_period: 5
-    - nb_theta: 1000
-    - nb_x_per_theta: 500
-    - meta_batch_size: 16
-    - batch_size_x: 64
-    - batch_size_theta: 8
-    - lr: 0.0002
-    - save_every: 5
-    - test_every: 5
-    - loss: normal
-    - weight: exp
-    - nb_epochs: 130
+    - `It contains the parameters related to the training configuration.`
+    - lr_scheduling:
+      - `True to use sheduling on the optimizer during training, the sheduling parameters are predefined in the code of the model.`
+      - `e.g. true, false`
+    - nb_iter:
+      - `The number of iteration of ALFI (T in the manuscript).`
+      - `e.g. 15`
+    - nb_theta:
+      - `The number of thetas (simulation parameters) in the meta training set. Each of them constitute a problem.`
+      - `e.g. 1000`
+    - nb_x_per_theta:
+      - `The number of observations for each theta in the meta training set.`
+      - `e.g. 500`
+    - meta_batch_size:
+      - `The number of problem taken from the training to perform one gradient update.`
+      - `e.g. 16`
+    - batch_size_theta:
+      - `The number of thetas drawn from the random distribution proposal on the true simulation parameters.`
+      - `e.g. 8`
+    - batch_size_x:
+      - `The number of observations generated for each of these theta.`
+      - `e.g. 64`
+    - lr:
+      - `The learning rate.`
+      - `e.g. 0.0002`
+    - save_every:
+      - `The number of epochs between two saveguard.``
+      - `e.g. 5`
+    - test_every:
+      - `The number of epochs between two tests (useful to do training plots).`
+      - `e.g. 5`
+    - loss:
+      - `The type of loss used. If you want to write your own it must be relevant to compare the proposal distribution with the true parameters value.`
+      - `e.g. normal, MSE, l1`
+    - weight:
+      - `The weighting on the loss which should controls the tradeoff exploration/exploitation of the iterative process.`
+      - `e.g. exp, oi, last, constant`
+    - nb_epochs:
+      - `The number of training epochs.`
+      - `e.g. 130`
 - test:
-    - nb_iter_alfi: 15
-    - nb_theta: 1000
-    - nb_x_per_theta: 500
-    - meta_batch_size: 16
-    - batch_size_x: 64
-    - batch_size_theta: 8
+    - nb_iter_alfi:
+      - `Same meaning as for train (but the value can be different).`
+    - nb_theta:
+      - `The number of different simulation parameters for test.`
+      - `e.g. 1000`
+    - nb_x_per_theta:
+    - `Same meaning as for train (but the value can be different).`
+    - meta_batch_size:
+      - `Same meaning as for train (but the value can be different). It is only useful to limit memory requirements.`
+    - batch_size_x:
+      - `Same as for train.`
+    - batch_size_theta:
+      - `Same as for train.`
 - networks:
-    - use_grad: true
+    - use_grad:
+      - `Put the variational gradient ($\Nabla_{\psi}q(\theta|\psi)$) as input or not.`
+      - `e.g. true, false`
     - split_theta: false
     - x_data_agg:
         - hidden_size: 50
