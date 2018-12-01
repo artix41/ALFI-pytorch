@@ -9,18 +9,15 @@ class Simulator:
         random.seed(rand_seed)
 
     def get_data(self, n_exp, n_samp):
-        pass
+        raise NotImplementedError
 
     def forward(self, theta):
-        pass
-
-    def parametrize(self, theta):
-        pass
-
-    def parametrize_inv(self, theta_param):
-        pass
+        raise NotImplementedError
 
     def get_thetas(self, n_exp):
+        raise NotImplementedError
+
+    def get_mle(self, samples):
         pass
 
     @staticmethod

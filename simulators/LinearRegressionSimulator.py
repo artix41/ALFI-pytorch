@@ -24,21 +24,6 @@ class LinearRegressionSimulator(Simulator):
         self.x_dim = dim_x + 2
 
     def get_data(self, n_exp, n_samp):
-
-        # Theta parametrized as an angle
-        #d = Uniform(self.angle_min, self.angle_max)
-        #thetas = d.sample(torch.Size([n_exp, self.p + 1]))
-        #thetas[thetas == 0] += 1e-4
-        #thetas[:, -1] = Uniform(self.offset_min, self.offset_max).sample(torch.Size([n_exp]))
-
-        #thetas_tmp = thetas.clone().unsqueeze(2)
-        #thetas_tmp[:, :-1] = torch.tan(thetas_tmp[:, :-1])
-
-        #d = Uniform(self.offset_min, self.offset_max)
-        #X = torch.cat((d.sample(torch.Size([n_exp, n_samp, self.p])), torch.ones(n_exp, n_samp, 1).to(self.device)), 2)
-        #Y = torch.matmul(X, thetas_tmp) + Normal(torch.tensor(0.).to(self.device), self.sigma).sample(torch.Size([n_exp, n_samp, 1]))
-
-        #X_real = torch.cat((X, Y), 2)
         thetas = self.get_thetas(n_exp)
         X_real = self.forward(thetas, n_samp)
         return thetas, X_real
@@ -65,21 +50,6 @@ class LinearRegressionSimulator(Simulator):
 
         X_real = torch.cat((X, Y), 2)
         return X_real
-
-    # Thetas is a real and is mapped to [angle_min, angle_max]
-    def parametrize(self, thetas):
-        theta_param = thetas.clone()
-        theta_param[:, :-1, :] = torch.atan(thetas[:, :-1, :])
-        theta_param[:, -1, :] = self.offset_min + f.tanh(thetas[:, -1, :]) * (self.offset_max - self.offset_min)
-        return theta_param
-
-    # Theta_param is clipped and is mapped to real values
-    def parametrize_inv(self, theta_param):
-        thetas = theta_param.clone()
-        thetas[thetas == 0] += 1e-4
-        thetas[:, :-1, :] = torch.tan(theta_param[:, :-1, :])
-        thetas[:, -1, :] = Simulator.atanh(2*(thetas[:, -1, :] - self.offset_min)/(self.offset_max - self.offset_min)-1)
-        return thetas
 
     def get_mle(self, samples):
         samples = samples.cpu()
