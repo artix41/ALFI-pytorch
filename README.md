@@ -99,7 +99,7 @@ Hereunder is a complete list of the configuration parameters with their descript
       - `Same as for train.`
 - networks:
     - use_grad:
-      - `Put the variational gradient (\Nabla_{\psi}q(\theta|\psi)) as input or not.`
+      - `Put the variational gradient (&Nabla_{&psi}q(&theta|&psi)) as input or not.`
       - `e.g. true, false`
     - split_theta: false
     - x_data_agg:
