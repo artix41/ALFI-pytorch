@@ -9,10 +9,10 @@ Official PyTorch implementation of the paper *Recurrent Machines for Likelihood-
 git clone git@github.com:artix41/ALFI-pytorch.git
 cd ALFI-pytorch/
 ```
-* Inside an [Anaconda](https://www.anaconda.com/) environment, install the requirements from the file `requirements.txt`: 
+* Inside an [Anaconda](https://www.anaconda.com/) environment, install the requirements from the file `requirements.txt`:
 ```bash
 conda install --file requirements.txt
-``` 
+```
 
 ## Usage
 
@@ -22,12 +22,17 @@ The script `run-experiments.py` starts one or several experiments described in t
 ```batch
 run-experiments.py configs/weinberg.py outputs -v 3
 ```
-Experiments are saved automatically every `save_every` iterations (given in the configuration file). If you want to load a previously saved experiment, simply use the `-l` loading option:
+Experiments are saved automatically every `save_every` iterations (given in the [configuration file](#configuration-file-cheat-sheet)). If you want to load a previously saved experiment, simply use the `-l` loading option:
 ```batch
 run-experiments.py configs/weinberg.py outputs -v 3 -l
 ```
 
 ### Use your own simulator
+
+### Configuration file cheat sheet
+Hereunder is a complete list of the configuration parameters with their description:
+
+
 
 ## Contacts
 
