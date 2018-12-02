@@ -15,9 +15,6 @@ class PoissonSimulator(Simulator):
         self.max = torch.tensor(max).to(device)
 
     def get_data(self, n_exp, n_samp):
-        #d = Uniform(self.min, self.max)
-        #thetas = d.sample(torch.Size([n_exp]))
-        #X_real = Poisson(torch.exp(thetas)).sample(torch.Size([n_samp, 1])).permute([2, 0, 1])
         thetas = self.get_thetas(n_exp)
         X_real = self.forward(thetas, n_samp)
         return thetas.reshape([-1, 1]), X_real
