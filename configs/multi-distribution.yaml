@@ -1,12 +1,10 @@
-model: LuckyALFINetCuda
+model: ALFINet
 simulator:
     name: NewMultiDistriSimulator
     parameters: []
 train:
     lr_scheduling: False
-    nb_iter_alfi_min: 15
-    nb_iter_alfi_max: 15
-    nb_iter_alfi_step: 15
+    nb_iter: 15
     nb_theta: 10000
     nb_x_per_theta: 500
     meta_batch_size: 32
@@ -18,7 +16,6 @@ train:
     loss: normal
     weight: exp
     nb_epochs: 250
-    step-noise: -1
 test:
     nb_iter_alfi: 30
     nb_theta: 500
@@ -26,7 +23,6 @@ test:
     meta_batch_size: 32
     batch_size_x: 20
     batch_size_theta: 20
-    step-noise: -1
 networks:
     use_grad: True
     split_theta: False

@@ -1,13 +1,11 @@
-model: LuckyALFINetCuda
+model: ALFINet
 simulator:
     name: LinearRegressionSimulator
     parameters:
         dim_x: 3
 train:
     lr_scheduling: False
-    nb_iter_alfi_min: 15
-    nb_iter_alfi_max: 15
-    nb_iter_alfi_step: 15
+    nb_iter: 15
     nb_theta: 20000
     nb_x_per_theta: 1000
     meta_batch_size: 32

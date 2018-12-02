@@ -1,12 +1,10 @@
-model: LuckyALFINetCuda
+model: ALFINet
 simulator:
     name: PoissonSimulator
     parameters: []
 train:
     lr_scheduling: False
-    nb_iter_alfi_min: 15
-    nb_iter_alfi_max: 15
-    nb_iter_alfi_step: 15
+    nb_iter: 15
     nb_theta: 10000
     nb_x_per_theta: 500
     meta_batch_size: 32
@@ -26,8 +24,8 @@ test:
     batch_size_x: 20
     batch_size_theta: 20
 networks:
-    use_grad: True
-    split_theta: False
+    use_grad: true
+    split_theta: false
     x_data_agg:
         hidden_size: 50
         output_size: 20

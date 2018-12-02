@@ -30,7 +30,7 @@ run-experiments.py configs/weinberg.py outputs -v 3 -l
 ### Use your own simulator
 To implement your own simulator you should write a class that inherits from the
 abstract class [Simulator.py](simulators/Simulator.py) (details about method given in the code file).
-If possible you should implement your simulator in pytorch for computation efficience. However you can also used
+If possible you should implement your simulator in pytorch for computation efficience. However you can also use
  your own simulator by implementing the inherited class as a simple bridge between your simulator and the ALFI framework, just taking care of mapping your data from/to tensorial variables.
 
 ## Contacts
