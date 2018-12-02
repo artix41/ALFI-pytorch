@@ -2,6 +2,5 @@ from simulators.Simulator import Simulator
 from simulators.PoissonSimulator import PoissonSimulator
 from simulators.WeinbergSimulator import WeinbergSimulator
 from simulators.LinearRegressionSimulator import LinearRegressionSimulator
-from simulators.MultiDistriSimulator import MultiDistriSimulator
 from simulators.GaussianSimulator import GaussianSimulator
-from simulators.NewMultiDistriSimulator import NewMultiDistriSimulator
+from simulators.MultiDistriSimulator import MultiDistriSimulator
