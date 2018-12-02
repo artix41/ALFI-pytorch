@@ -33,7 +33,7 @@ class Simulator:
     '''
     This method generates a realistic set of problems by generating parameters values.
     IN:     n_exp:  int, the number of problems to generate.
-    OUT:    thetas:      n_exp x theta_dim, it contains the parameters of each problem.
+    OUT:    thetas: n_exp x theta_dim, it contains the parameters of each problem.
     '''
     def get_thetas(self, n_exp):
         raise NotImplementedError
@@ -41,7 +41,8 @@ class Simulator:
     '''
     This method computes the maximum likelihood estimator (MLE) of the sets of observations
     IN:     samples:  n_exp x n_samp x x_dim, the sets (n_exp sets) of observations.
-    OUT:    mles:      n_exp x theta_dim, it contains the MLE of the parameters of each set of observation.
+    OUT:    mles:     n_exp x theta_dim, it contains the MLE of the parameters of each set of observation.
+            mles_std: n_exp x theta_dim, it contains the univariate standard deviation of each estimated parameter.
     '''
     def get_mle(self, samples):
         pass
