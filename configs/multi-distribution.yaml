@@ -1,0 +1,64 @@
+model: LuckyALFINetCuda
+simulator:
+    name: NewMultiDistriSimulator
+    parameters: []
+train:
+    lr_scheduling: False
+    nb_iter_alfi_min: 15
+    nb_iter_alfi_max: 15
+    nb_iter_alfi_step: 15
+    nb_theta: 10000
+    nb_x_per_theta: 500
+    meta_batch_size: 32
+    batch_size_x: 20
+    batch_size_theta: 20
+    lr: 0.0001
+    save_every: 1
+    test_every: 1
+    loss: normal
+    weight: exp
+    nb_epochs: 250
+    step-noise: -1
+test:
+    nb_iter_alfi: 30
+    nb_theta: 500
+    nb_x_per_theta: 500
+    meta_batch_size: 32
+    batch_size_x: 20
+    batch_size_theta: 20
+    step-noise: -1
+networks:
+    use_grad: True
+    split_theta: False
+    x_data_agg:
+        hidden_size: 50
+        output_size: 20
+    theta_data_agg:
+        hidden_size: 20
+        output_size: 30
+    RIM:
+        hidden_size: 30
+        st_size: 40
+        bounded: .25
+proposal:
+    name: GaussianProposal
+    sigma: .1
+plot:
+    rmse_t:
+        nb_theta: 12
+    hist-x:
+        nb_theta: 12
+        nb_samples_real: 500
+        nb_samples_gen: 500
+        nb_bins: 10
+    init_box:
+        nb_theta: 12
+    init_rmse_t:
+        nb_theta: 12
+    init_comparison:
+        nb_inits: 20
+        nb_theta: 500
+    init_MLE:
+        nb_theta: 12
+    font-size: 20
+    title: False
