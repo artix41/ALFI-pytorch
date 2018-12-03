@@ -1,6 +1,6 @@
 # Automatic Likelihood-Free Inference
 
-Official PyTorch implementation of the paper *Recurrent Machines for Likelihood-Free Inference*, published at the NeurIPS 2018 Workshop on Meta-Learning.
+Official PyTorch implementation of the paper *Recurrent Machines for Likelihood-Free Inference*, published at the NeurIPS 2018 Workshop on Meta-Learning. [arxiv:1811.12932](https://arxiv.org/abs/1811.12932)
 
 ## Installation
 
