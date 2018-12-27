@@ -28,7 +28,7 @@ class GaussianProposal():
     def grad_log(self, thetas):
         psi = self.psi.clone()
         sigma = torch.exp(psi[:, 1, :])
-        grad_mu = (psi[:, 0, :] - thetas)/(sigma**2)
+        grad_mu = (thetas - psi[:, 0, :])/(sigma**2)
         grad_sigma = (((psi[:, 0, :] - thetas)**2)/sigma**2 - 1)
         grad_psi = torch.cat((grad_mu.unsqueeze(1), (sigma*grad_sigma).unsqueeze(1)), 1)
         return grad_psi
