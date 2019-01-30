@@ -67,7 +67,7 @@ Hereunder is a complete list of the configuration parameters with their descript
 - `networks`:
     - It contains the parameters related to the training configuration.
     - `use_grad`:
-      - Put the variational gradient (`<img src="https://latex.codecogs.com/svg.latex?\Large&space;\nabla_{\psi}q(\theta|\psi)" title="\Large \nabla_{\psi}q(\theta|\psi)" />`) as input or not.
+      - Put the variational gradient (![](https://latex.codecogs.com/svg.latex?\Large&space;\nabla_{\psi}q(\theta|\psi))) as input or not.
       - e.g. true, false.
     - `split_theta`:
       - Whether consider the optimization over each parameter independently or not.
