@@ -3,8 +3,3 @@ from models.DataAggregator import DataAggregator
 from models.ThetaAggregator import ThetaAggregator
 from models.RIM import RIM
 from models.ALFINet import ALFINet
-from models.NewALFINet import NewALFINet
-from models.NewLossALFINet import NewLossALFINet
-from models.LuckyALFINet import LuckyALFINet
-from models.SimplerALFINet import SimplerALFINet
-from models.LuckyALFINetCuda import LuckyALFINetCuda

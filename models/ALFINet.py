@@ -13,7 +13,7 @@ from random import randint
 import time
 
 
-class LuckyALFINetCuda(nn.Module):
+class ALFINet(nn.Module):
     dict_loss_func = {"mse": losses.loss_mse,
                       "l1": losses.loss_l1,
                       "normal": losses.loss_normal_density}
@@ -79,18 +79,15 @@ class LuckyALFINetCuda(nn.Module):
                        self.st_rim_size, arch_config['RIM']['hidden_size'],
                        proposal.psi_dim*theta_dim, bounded=arch_config['RIM']['bounded']).to(self.device)
 
-        if train_config['loss'] not in LuckyALFINetCuda.dict_loss_func.keys():
+        if train_config['loss'] not in ALFINet.dict_loss_func.keys():
             raise ValueError("Invalid loss in argument of RIM: {}".format(train_config['loss']))
-        if train_config['weight'] not in LuckyALFINetCuda.dict_weight_func.keys():
+        if train_config['weight'] not in ALFINet.dict_weight_func.keys():
             raise ValueError("Invalid weight in argument of RIM: {}".format(train_config['weight']))
 
-        self.loss_func = LuckyALFINetCuda.dict_loss_func[train_config['loss']]
-        self.weight_func = LuckyALFINetCuda.dict_weight_func[train_config['weight']]
+        self.loss_func = ALFINet.dict_loss_func[train_config['loss']]
+        self.weight_func = ALFINet.dict_weight_func[train_config['weight']]
         self.optimizer = optim.Adam(self.parameters(), lr=2e-4)
-        if train_config['lr_scheduling']:
-            self.scheduler = optim.lr_scheduler.ReduceLROnPlateau(self.optimizer, verbose=True, threshold=1e-1,
-                                                                  patience=5)
-
+        
     def forward_step(self, x_real_encoded, x_gen, theta_gen, st, psi_t, phase="train"):
         """x_real, x_gen: (meta_bs, theta_bs, x_bs, x_dim)
            theta_gen: (meta_bs, theta_bs, theta_dim)"""
@@ -194,9 +191,7 @@ class LuckyALFINetCuda(nn.Module):
         nb_epochs = train_config['nb_epochs']
         test_every = train_config['test_every']
         save_every = train_config['save_every']
-        nb_iter_min = train_config['nb_iter_alfi_min']
-        nb_iter_max = train_config['nb_iter_alfi_max']
-        nb_iter_step = train_config['nb_iter_alfi_step']
+        nb_iter = train_config['nb_iter']
 
         if self.epoch == 0:
             theta_train, X_train = self.simulator.get_data(nb_theta, train_config['nb_x_per_theta'])
@@ -265,8 +260,7 @@ class LuckyALFINetCuda(nn.Module):
 
             loss_epoch /= (nb_theta // meta_batch_size)
             rmse_epoch /= (nb_theta // meta_batch_size)
-            if train_config['lr_scheduling']:
-                self.scheduler.step(loss_epoch)
+            
             if self.verbose >= 2:
                 print("")
 
@@ -309,14 +303,14 @@ class LuckyALFINetCuda(nn.Module):
         #print(self.mu_Xtest)
         with torch.no_grad():
             self.X_test.requires_grad = False
-            list_psi_t = torch.zeros(nb_theta, test_config['nb_iter_alfi'], self.psi_dim, self.theta_dim).to(self.device)
+            list_psi_t = torch.zeros(nb_theta, test_config['nb_iter'], self.psi_dim, self.theta_dim).to(self.device)
             for i in range(0, nb_theta, mb_size):
                 i_end = i + mb_size
                 if i_end >= test_config['nb_theta']:
                     i_end = test_config['nb_theta']
 
                 list_psi_t[i:i_end, :, :, :] = self.forward(self.X_test[i:i_end], test_config['batch_size_x'], mb_size,
-                                              test_config['nb_iter_alfi'], phase="test")
+                                              test_config['nb_iter'], phase="test")
             loss_test = 0
 
             for i in range(nb_theta):

@@ -47,6 +47,7 @@ python=3.7.0=h6e4f718_3
 python-dateutil=2.7.5=py37_0
 pytorch=0.4.1=py37ha74772b_0
 pytz=2018.7=py37_0
+pyyaml=3.13=py37h14c3975_0
 qt=5.9.6=h8703b6f_2
 readline=7.0=h7b6447c_5
 setuptools=40.6.2=py37_0

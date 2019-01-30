@@ -14,7 +14,7 @@ parser = argparse.ArgumentParser(
 parser.add_argument('configs_dir', type=str, help='Path to configs directory or to a config file')
 parser.add_argument('output_dir', type=str, help='Path to the output directory')
 parser.add_argument('-l', '--load', action="store_true", help='Load the last model for already existing experiments')
-parser.add_argument('-v', choices=['0','1','2','3'], default=1, dest='verbose',
+parser.add_argument('-v', choices=['0','1','2','3'], default=3, dest='verbose',
                     help='Level of verbosity, between 0 and 3')
 args = parser.parse_args()
 

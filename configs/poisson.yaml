@@ -3,8 +3,8 @@ simulator:
     name: PoissonSimulator
     parameters: []
 train:
-    lr_scheduling: False
-    nb_iter: 15
+    nb_epochs: 100
+    nb_iter: 5
     nb_theta: 10000
     nb_x_per_theta: 500
     meta_batch_size: 32
@@ -15,9 +15,8 @@ train:
     test_every: 1
     loss: normal
     weight: exp
-    nb_epochs: 100
 test:
-    nb_iter_alfi: 15
+    nb_iter: 15
     nb_theta: 500
     nb_x_per_theta: 500
     meta_batch_size: 32

@@ -4,7 +4,7 @@ import shutil
 import torch
 import numpy as np
 
-from models import ALFINet, NewALFINet, NewLossALFINet, LuckyALFINet, SimplerALFINet, LuckyALFINetCuda
+from models import ALFINet
 from utils import Visualizer
 import utils.losses as losses
 import utils.weights as weights

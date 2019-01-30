@@ -3,7 +3,7 @@ simulator:
     name: NewMultiDistriSimulator
     parameters: []
 train:
-    lr_scheduling: False
+    nb_epochs: 250
     nb_iter: 15
     nb_theta: 10000
     nb_x_per_theta: 500
@@ -15,9 +15,8 @@ train:
     test_every: 1
     loss: normal
     weight: exp
-    nb_epochs: 250
 test:
-    nb_iter_alfi: 30
+    nb_iter: 30
     nb_theta: 500
     nb_x_per_theta: 500
     meta_batch_size: 32

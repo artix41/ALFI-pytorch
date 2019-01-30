@@ -3,7 +3,7 @@ simulator:
     name: WeinbergSimulator
     parameters: []
 train:
-    lr_scheduling: false
+    nb_epochs: 130
     nb_iter: 15
     nb_theta: 1000
     nb_x_per_theta: 500
@@ -15,9 +15,8 @@ train:
     test_every: 5
     loss: normal
     weight: exp
-    nb_epochs: 130
 test:
-    nb_iter_alfi: 15
+    nb_iter: 15
     nb_theta: 1000
     nb_x_per_theta: 500
     meta_batch_size: 16
