@@ -188,8 +188,9 @@ def experiment(config, output_dir, load=False, verbose=2, device="cpu"):
     visu.box_plot(rmse_alfi_t, plot_dir, name="box-plot-MSE-test-marginalized")
     
     visu.rmse_evol(rmse_alfi_t, plot_dir=plot_dir)
-    visu.rmse_evol(avg_psi_t[:, :, 0, 0], plot_dir=plot_dir, name="psi-avg-0-evolv")
-    visu.rmse_evol(avg_psi_t[:, :, 0, 1], plot_dir=plot_dir, name="psi-avg-1-evolv")
+    for i in range(avg_psi_t.shape[3]):
+       visu.rmse_evol(avg_psi_t[:, :, 0, i], plot_dir=plot_dir, name="psi-avg-" + str(i) + "-evolv")
+    
     # if config["simulator"]["name"] in ["PoissonSimulator", "LinearRegressionSimulator", "MultiDistriSimulator", "NewMultiDistriSimulator"]:
     #     mle, mle_sigma = simulator.get_mle(alfi.unnormalize(alfi.X_test[:nb_theta], alfi.mu_X, alfi.sigma_X))
     # 

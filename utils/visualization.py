@@ -241,7 +241,7 @@ class Visualizer:
                 theta_gen = proposal.sample(nb_samples_gen)
                 X_gen = sim.forward(theta_gen.view(nb_samples_gen, -1), 1).view(-1, x_dim)
                 X_real = sim.forward(theta_star.unsqueeze(0), nb_samples_real).view(-1, x_dim)
-                plt.subplot(3, 3, i_theta+1)
+                plt.subplot(int(config["nb_theta"]/3. + .5), 3, i_theta+1)
                 if self.title:
                     plt.title(r'Real: {} −− Inferred: {}'.format(
                         theta_star.cpu().detach().numpy(), 
