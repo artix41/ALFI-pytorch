@@ -276,10 +276,10 @@ class ALFINet(nn.Module):
     def test(self, test_config, nb_theta=None, regenerate=False):
 
         mb_size = 64
-        if nb_theta == None:
+        if nb_theta is None:
             nb_theta = test_config['nb_theta']
 
-        if regenerate or self.theta_test is None or self.X_test is None:
+        if regenerate or self.theta_test is None or self.X_test is None or nb_theta > self.theta_test.shape[0]:
             theta_test, X_test = self.simulator.get_data(nb_theta,
                                                          test_config['nb_x_per_theta'])
             if nb_theta > 1000:
@@ -295,19 +295,13 @@ class ALFINet(nn.Module):
                 self.mu_theta_test, self.sigma_theta_test, self.theta_test = self.normalize(theta_test.to(self.device))
             self.X_test = self.X_test.view(X_test.shape[0], X_test.shape[1], X_test.shape[2]).to(self.device)
 
-
-            #self.sigma_Xtest, self.X_test = self.mu_Xtrain, self.sigma_Xtrain, self.X_train
-            #self.mu_theta_test, self.sigma_theta_test, self.theta_test = self.mu_theta_train, self.sigma_theta_train, self.theta_train
-
-        #print(self.sigma_Xtest)
-        #print(self.mu_Xtest)
         with torch.no_grad():
             self.X_test.requires_grad = False
             list_psi_t = torch.zeros(nb_theta, test_config['nb_iter'], self.psi_dim, self.theta_dim).to(self.device)
             for i in range(0, nb_theta, mb_size):
                 i_end = i + mb_size
-                if i_end >= test_config['nb_theta']:
-                    i_end = test_config['nb_theta']
+                if i_end >= nb_theta:
+                    i_end = nb_theta
 
                 list_psi_t[i:i_end, :, :, :] = self.forward(self.X_test[i:i_end], test_config['batch_size_x'], mb_size,
                                               test_config['nb_iter'], phase="test")
